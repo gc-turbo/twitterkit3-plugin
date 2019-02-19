@@ -53,6 +53,11 @@ The login reponse object is defined as follows.
   token: '<Twitter Oauth Token>'
 }
 ```
+IMPORTANT: The userId from the login might not be equal to the real user id because TwitterKit has a bug of saving the token user id in java long type which can't hand the huge twitter user ids. Thus to get the real user id need to use the showUser function after login and get the id_str field. See:
+
+https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/internal/oauth/OAuthResponse.java#L52
+
+https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/models/User.java#L128
 
 #### Logout
 
