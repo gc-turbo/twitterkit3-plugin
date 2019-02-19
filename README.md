@@ -16,7 +16,7 @@ If desired to see the user's email (for example, by using the verify credentials
 
 Make sure you put in your valid API keys in their respective place.
 
-`cordova plugin add https://github.com/chroa/twitter-connect-plugin#twitterkit3 --variable TWITTER_KEY=<Twitter Consumer Key> --variable TWITTER_SECRET=<Twitter Consumer Secret>`
+`cordova plugin add https://github.com/guylando/twitterkit3-plugin --variable TWITTER_KEY=<Twitter Consumer Key> --variable TWITTER_SECRET=<Twitter Consumer Secret>`
 
 ### Usage
 
@@ -45,30 +45,6 @@ The login reponse object is defined as follows.
   secret: '<Twitter Oauth Secret>',
   token: '<Twitter Oauth Token>'
 }
-```
-
-**/ ! \ For iOS, add the following code to your AppDelegate file**
-//Thanks to [@donuzium](https://github.com/chroa/twitter-connect-plugin/issues/8)
-```
-#import "AppDelegate.h"
-#import "MainViewController.h"
-// added
-#import <TwitterKit/TwitterKit.h>
-
-@implementation AppDelegate
-- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
-{
-    self.viewController = [[MainViewController alloc] init];
-    return [super application:application didFinishLaunchingWithOptions:launchOptions];
-}
-
-// added
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
-    return [[Twitter sharedInstance] application:app openURL:url options:options];
-}
-
-@end
-```
 
 #### Logout
 
