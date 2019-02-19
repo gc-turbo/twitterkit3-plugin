@@ -45,6 +45,7 @@ The login reponse object is defined as follows.
   secret: '<Twitter Oauth Secret>',
   token: '<Twitter Oauth Token>'
 }
+```
 
 #### Logout
 
