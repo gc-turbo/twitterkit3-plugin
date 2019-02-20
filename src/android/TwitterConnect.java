@@ -195,6 +195,7 @@ public class TwitterConnect extends CordovaPlugin {
 			@Override
 			public void run() {
 				TwitterAuthClient twitterAuthClient = new TwitterAuthClient();
+				// https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/identity/TwitterAuthClient.java#L80
 				twitterAuthClient.authorize(activity, new Callback<TwitterSession>() {
 					@Override
 					public void success(final Result<TwitterSession> result) {
@@ -205,7 +206,7 @@ public class TwitterConnect extends CordovaPlugin {
 					@Override
 					public void failure(final TwitterException e) {
 						Log.v(LOG_TAG, "Failed login session.");
-						callbackContext.error("Failed login session.");
+						callbackContext.error("Failed login session: " + e.getLocalizedMessage());
 					}
 				});
 			}
@@ -226,7 +227,17 @@ public class TwitterConnect extends CordovaPlugin {
 		JSONObject response = new JSONObject();
 		try {
 			response.put("userName", result.getUserName());
-			response.put("userId", result.getUserId()); //does not match idStr
+			// Calling result.getUserId() gets a user id which is fine in java but gets truncated in javascript because its too big for a javascript integer and thus we convert it to string which is fine in javascript, see:
+			// https://twittercommunity.com/t/twitter-id-and-id-str-are-different/79942
+			// https://developer.twitter.com/en/docs/basics/twitter-ids
+			// https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object
+			// NOTE: TwitterKit saves user id as a long and doesnt provide it as a string so need to convert to string before sending it to javascript
+			// https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/TwitterSession.java#L48
+			// https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/Session.java#L45
+			// https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/identity/AuthHandler.java#L91
+			// https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/models/User.java#L128
+			// https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/internal/oauth/OAuthResponse.java#L52
+			response.put("userId", result.getUserId() + "");
 			response.put("secret", result.getAuthToken().secret);
 			response.put("token", result.getAuthToken().token);
 		} catch (JSONException e) {
@@ -265,7 +276,7 @@ public class TwitterConnect extends CordovaPlugin {
 					@Override
 					public void failure(TwitterException e) {
 						Log.v(LOG_TAG, "ShowUser API call failed.");
-						callbackContext.error(e.getLocalizedMessage());
+						callbackContext.error("ShowUser API call failed: " + e.getLocalizedMessage());
 					}
 				});
 			}
@@ -293,7 +304,7 @@ public class TwitterConnect extends CordovaPlugin {
 					@Override
 					public void failure(TwitterException e) {
 						Log.v(LOG_TAG, "VerifyCredentials API call failed.");
-						callbackContext.error(e.getLocalizedMessage());
+						callbackContext.error("VerifyCredentials API call failed: " + e.getLocalizedMessage());
 					}
 				});
 			}
@@ -326,7 +337,7 @@ public class TwitterConnect extends CordovaPlugin {
 					@Override
 					public void failure(TwitterException exception) {
 						Log.v(LOG_TAG, "VerifyCredentials API call failed.");
-						callbackContext.error(exception.getLocalizedMessage());
+						callbackContext.error("VerifyCredentials API call failed: " + exception.getLocalizedMessage());
 					}
 				});
 			}
