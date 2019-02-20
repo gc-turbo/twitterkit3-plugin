@@ -8,7 +8,14 @@ Cordova/PhoneGap plugin to use Twitter Single Sign On
 
 Create a Twitter application in https://apps.twitter.com and get the consumer key and secret under the "Keys and Access Tokens" tab.
 
-Make sure that the Callback URL is filled in when creating the application. Any valid url will do, Twitter recommends http://placeholder.com.
+IMPORTANT OR OTHERWISE LOGIN WILL FAIL: Make sure that the Callback URL contains:
+```
+twittersdk://
+twitterkit-CONSUMERKEY://
+```
+See: https://developer.twitter.com/en/docs/basics/apps/guides/callback-urls.html
+
+(replace CONSUMERKEY by your twitter app consumer key)
 
 If desired to see the user's email (for example, by using the verify credentials endpoint), the "Additional Permissions" (in the "Permissions" tab) needs to be checked. Consequently, fill in the respective Privacy Policy URL and Terms of Service URL fields.
 
@@ -46,6 +53,11 @@ The login reponse object is defined as follows.
   token: '<Twitter Oauth Token>'
 }
 ```
+IMPORTANT: The userId from the login might not be equal to the real user id because TwitterKit has a bug of saving the token user id in java long type which can't hand the huge twitter user ids. Thus to get the real user id need to use the showUser function after login and get the id_str field. See:
+
+https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/internal/oauth/OAuthResponse.java#L52
+
+https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/models/User.java#L128
 
 #### Logout
 
