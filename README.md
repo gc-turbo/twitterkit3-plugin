@@ -53,11 +53,28 @@ The login reponse object is defined as follows.
   token: '<Twitter Oauth Token>'
 }
 ```
-IMPORTANT: The userId from the login might not be equal to the real user id because TwitterKit has a bug of saving the token user id in java long type which can't hand the huge twitter user ids. Thus to get the real user id need to use the showUser function after login and get the id_str field. See:
 
-https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/internal/oauth/OAuthResponse.java#L52
+NOTE: This plugin has a fix to a bug appearing in the other twitter cordova plugins which returned userId as an integer which is fine in java but gets truncated in javascript because its too big for a javascript integer and thus this plugin fixed it by converting the user id to string before passing it to javascript which insures that correct userId is retrieved.
+
+See:
+
+https://twittercommunity.com/t/twitter-id-and-id-str-are-different/79942
+
+https://developer.twitter.com/en/docs/basics/twitter-ids
+
+https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object
+
+NOTE: TwitterKit saves user id as a long and doesnt provide it as a string so need to convert to string before sending it to javascript
+
+https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/TwitterSession.java#L48
+
+https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/Session.java#L45
+
+https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/identity/AuthHandler.java#L91
 
 https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/models/User.java#L128
+
+https://github.com/twitter/twitter-kit-android/blob/master/twitter-core/src/main/java/com/twitter/sdk/android/core/internal/oauth/OAuthResponse.java#L52
 
 #### Logout
 
