@@ -1,8 +1,9 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import <TwitterKit/TwitterKit.h>
+#import "AppDelegate+TwitterConnect.h"
+#import <TwitterKit/TWTRKit.h>
 
-@implementation AppDelegate
+@implementation AppDelegate (TwitterConnect)
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
     self.viewController = [[MainViewController alloc] init];

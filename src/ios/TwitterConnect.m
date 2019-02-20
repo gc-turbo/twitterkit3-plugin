@@ -1,6 +1,6 @@
 
 #import "TwitterConnect.h"
-#import <TwitterKit/TwitterKit.h>
+#import <TwitterKit/TWTRKit.h>
 
 @implementation TwitterConnect
 
@@ -57,7 +57,7 @@
 	NSError *error = nil;
     
 	NSURLRequest *apiRequest = [apiClient URLRequestWithMethod:@"GET"
-														   URL:@"https://api.twitter.com/1.1/users/show.json"
+														   URLString:@"https://api.twitter.com/1.1/users/show.json"
                                                     parameters:requestParameters
 														 error:&error];
 	[apiClient sendTwitterRequest:apiRequest
@@ -111,7 +111,7 @@
   NSError *error = nil;
   
   NSURLRequest *apiRequest = [apiClient URLRequestWithMethod:@"GET"
-                                                         URL:@"https://api.twitter.com/1.1/account/verify_credentials.json"
+                                                         URLString:@"https://api.twitter.com/1.1/account/verify_credentials.json"
                                                   parameters:requestParameters
                                                        error:&error];
   [apiClient sendTwitterRequest:apiRequest

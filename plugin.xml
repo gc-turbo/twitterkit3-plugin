@@ -57,8 +57,8 @@
 		<source-file src="src/ios/TwitterConnect.m" />
 		<header-file src="src/ios/AppDelegate+TwitterConnect.h" />
 		<source-file src="src/ios/AppDelegate+TwitterConnect.m" />
-		<framework src="src/ios/TwitterKit.framework" custom="true" />
-		<framework src="src/ios/TwitterCore.framework" custom="true" />
+		<framework src="src/ios/TwitterKit.framework" custom="true" embed="true" />
+		<framework src="src/ios/TwitterCore.framework" custom="true" embed="true" />
 		<framework src="src/ios/SafariServices.framework" custom="true" />
 		<resource-file src="src/ios/TwitterKit.framework/TwitterKitResources.bundle" />
 		<config-file target="*-Info.plist" parent="CFBundleURLTypes">
