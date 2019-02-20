@@ -57,6 +57,8 @@
 		<source-file src="src/ios/TwitterConnect.m" />
 		<header-file src="src/ios/AppDelegate+TwitterConnect.h" />
 		<source-file src="src/ios/AppDelegate+TwitterConnect.m" />
+		<source-file src="src/ios/TwitterKit.framework" target-dir="lib" framework="true" />
+		<source-file src="src/ios/TwitterCore.framework" target-dir="lib" framework="true" />
 		<framework src="src/ios/TwitterKit.framework" custom="true" embed="true" />
 		<framework src="src/ios/TwitterCore.framework" custom="true" embed="true" />
 		<framework src="src/ios/SafariServices.framework" custom="true" />
