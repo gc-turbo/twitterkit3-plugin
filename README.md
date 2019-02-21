@@ -2,6 +2,8 @@
 ### **Using Twitter Kit 3**
 Cordova/PhoneGap plugin to use Twitter Single Sign On 
 
+Available on npm at: https://www.npmjs.com/package/twitter3-connect-plugin
+
 ### Install
 
 ##### Create a Twitter app
