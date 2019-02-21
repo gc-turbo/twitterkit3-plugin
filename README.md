@@ -25,6 +25,8 @@ Make sure you put in your valid API keys in their respective place.
 
 `cordova plugin add https://github.com/guylando/twitterkit3-plugin --variable TWITTER_KEY=<Twitter Consumer Key> --variable TWITTER_SECRET=<Twitter Consumer Secret>`
 
+IMPORTANT: This plugin has all necessary url scheme handling built-in and does not require you to add anything to your ios AppDelegate. However some plugins such as https://github.com/jeduan/cordova-plugin-facebook4 have openUrl code which prevents this plugin openUrl to run resulting in the login not finalizing after coming back to the app from the twitter webview. So if such problems are encountered then check which plugins are you using and fix the bug there.
+
 ### Usage
 
 This plugin adds an object to the window named TwitterConnect. The following methods are provided by the plugin.
