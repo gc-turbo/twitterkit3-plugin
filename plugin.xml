@@ -62,7 +62,7 @@
 		<!-- TwitterKit.framework and TwitterCore.framework must be embedded or otherwise there is a runtime dyld missing library error -->
 		<framework src="src/ios/TwitterKit.framework" custom="true" embed="true" />
 		<framework src="src/ios/TwitterCore.framework" custom="true" embed="true" />
-		<framework src="src/ios/SafariServices.framework" custom="true" />
+		<framework src="SafariServices.framework" />
 		<resource-file src="src/ios/TwitterKit.framework/TwitterKitResources.bundle" />
 		<config-file target="*-Info.plist" parent="CFBundleURLTypes">
 			<array>
